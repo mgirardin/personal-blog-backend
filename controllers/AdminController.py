@@ -39,8 +39,8 @@ class EmployeeSignin(object):
         encoded_jwt = create_employee_access_token(user["id"])
         json_response = json.dumps({"status" : "success", "jwt": encoded_jwt.decode()})
         resp = Response(json_response)
-        #resp.set_cookie("refresh_token", value = create_employee_refresh_token(user["login"]), httponly = True, 
-        #                secure = True, domain=".matheusgirardin.com", samesite='Lax', max_age=24*60*60)
+        resp.set_cookie("refresh_token", value = create_employee_refresh_token(user["login"]), httponly = True, 
+                        secure = True, domain=".matheusgirardin.com", samesite='Lax', max_age=24*60*60)
         return resp,200,DEFAULT_HEADERS
 
 """class EmployeeRefreshController(object):
