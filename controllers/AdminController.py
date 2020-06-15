@@ -24,7 +24,7 @@ class EmployeeSignup(object):
                 lambda s: len(s) >= 8                   # must be at least 7 characters
         ]
         return all(rule(password) for rule in rules)
-        
+
 class EmployeeSignin(object):
     def post(self, request):
         payload = request.get_json()
@@ -32,13 +32,10 @@ class EmployeeSignin(object):
         if(not all(elem in payload for elem in needed_parameters)):
             return MISSING_PARAMETER
         login = payload["login"]
-        #passwd = payload["passwd"]
-        # get user from datastore
-        #user = {"id": 0, "login": "girardin", "salt": "aaa", "passwd_hash": "aaaaa"}
+        passwd = payload["passwd"]
         user = User.get(login)
-
-        #if((not user) or (not check_password(passwd, user["salt"], user["passwd_hash"]))):
-        #    return NOT_AUTHORIZED
+        if((not user) or (not check_password(passwd, user["salt"], user["passwd_hash"]))):
+            return NOT_AUTHORIZED
         #encoded_jwt = create_employee_access_token(user["id"])
         #json_response = json.dumps({"status" : "success", "jwt": encoded_jwt.decode()})
         #resp = Response(json_response)
