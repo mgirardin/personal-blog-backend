@@ -43,13 +43,11 @@ class EmployeeSignin(object):
                         secure = True, domain=".matheusgirardin.com", samesite='Lax', max_age=24*60*60)
         return resp,200,DEFAULT_HEADERS
 
-"""class EmployeeRefreshController(object):
+class EmployeeRefreshController(object):
     def get(self, request):
         refresh_token = request.cookies.get('refresh_token')
-        is_valid, username = validate_employee_refresh_token(refresh_token)
+        is_valid, user = validate_employee_refresh_token(refresh_token)
         if(not is_valid):
             return json.dumps({"status": "error", "error" : "NotValidRefreshToken"}),401,DEFAULT_HEADERS
-        # get user from datastore
-        user = {"id": 0}
-        encoded_jwt = create_employee_access_token(user["id"])
-        return json.dumps({"access_token": encoded_jwt.decode()}), 200, DEFAULT_HEADERS"""
+        encoded_jwt = create_employee_access_token(user)
+        return json.dumps({"access_token": encoded_jwt.decode()}), 200, DEFAULT_HEADERS
