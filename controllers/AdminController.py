@@ -34,9 +34,9 @@ class EmployeeSignin(object):
         login = payload["login"]
         passwd = payload["passwd"]
         user = User.get(login)
-        if((not user) or (not check_password(passwd, user["salt"], user["passwd_hash"]))):
+        if((not user) or (not check_password(passwd, user["salt"], user["passwd"]))):
             return NOT_AUTHORIZED
-        encoded_jwt = create_employee_access_token(user["id"])
+        encoded_jwt = create_employee_access_token(user["login"])
         json_response = json.dumps({"status" : "success", "jwt": encoded_jwt.decode()})
         resp = Response(json_response)
         resp.set_cookie("refresh_token", value = create_employee_refresh_token(user["login"]), httponly = True, 
