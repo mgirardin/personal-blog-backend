@@ -36,12 +36,12 @@ class EmployeeSignin(object):
         user = User.get(login)
         if((not user) or (not check_password(passwd, user["salt"], user["passwd_hash"]))):
             return NOT_AUTHORIZED
-        #encoded_jwt = create_employee_access_token(user["id"])
-        #json_response = json.dumps({"status" : "success", "jwt": encoded_jwt.decode()})
-        #resp = Response(json_response)
+        encoded_jwt = create_employee_access_token(user["id"])
+        json_response = json.dumps({"status" : "success", "jwt": encoded_jwt.decode()})
+        resp = Response(json_response)
         #resp.set_cookie("refresh_token", value = create_employee_refresh_token(user["login"]), httponly = True, 
         #                secure = True, domain=".matheusgirardin.com", samesite='Lax', max_age=24*60*60)
-        return json.dumps(user),200,DEFAULT_HEADERS
+        return resp,200,DEFAULT_HEADERS
 
 """class EmployeeRefreshController(object):
     def get(self, request):
