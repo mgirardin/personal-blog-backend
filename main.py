@@ -1,6 +1,6 @@
 import json 
 from helper import cors
-from controllers.ArticleController import ArticleController
+from controllers.ArticleController import ArticleController, ArticlesController
 from controllers.AdminController import EmployeeSignin, EmployeeRefreshController
 
 DEFAULT_HEADERS = {
@@ -10,6 +10,7 @@ DEFAULT_HEADERS = {
 def defined_routers():
     routers = {
     	"/article" : ArticleController,
+        "/articles" : ArticlesController,
         "/signin": EmployeeSignin,
         "/refresh": EmployeeRefreshController
     }

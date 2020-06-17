@@ -62,3 +62,8 @@ class ArticleController(object):
         }
         Article.create(post, author, metadata)
         return json.dumps({"status": "ok"}), 200, DEFAULT_HEADERS
+
+class ArticlesController(object):
+    def get(self, request):
+        articles = Article.get_all()
+        return json.dumps({"articles": articles}), 200, DEFAULT_HEADERS
