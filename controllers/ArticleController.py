@@ -65,5 +65,9 @@ class ArticleController(object):
 
 class ArticlesController(object):
     def get(self, request):
-        articles = Article.get_all()
-        return json.dumps({"articles": articles}), 200, DEFAULT_HEADERS
+        try:
+            articles = Article.get_all()
+            return json.dumps({"articles": articles}), 200, DEFAULT_HEADERS
+        except Exception as e:
+            print(e)
+            return json.dumps({"articles": ""}), 200, DEFAULT_HEADERS
