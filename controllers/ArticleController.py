@@ -67,7 +67,11 @@ class ArticlesController(object):
     def get(self, request):
         try:
             articles = Article.get_all()
-            return json.dumps({"articles": articles}), 200, DEFAULT_HEADERS
+            if(articles == None):
+                articles = ""
+            def converter(o):
+                return o.__str__()
+            return json.dumps({"articles": articles}, default=converter), 200, DEFAULT_HEADERS
         except Exception as e:
             print(e)
-            return json.dumps({"articles": ""}), 200, DEFAULT_HEADERS
+        return json.dumps({"articles": articles}), 200, DEFAULT_HEADERS
