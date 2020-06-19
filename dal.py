@@ -54,3 +54,15 @@ class User:
         for doc in query_ref.stream():
             user = doc.to_dict()
         return user
+
+class Subscriber:
+    @staticmethod
+    def create(email):
+        try:
+            kind = 'subscribers'
+            doc = client.collection(kind).document()
+            doc.set({
+                'email': email
+            })
+        except Exception as e:
+            print(e)
