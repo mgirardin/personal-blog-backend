@@ -66,3 +66,19 @@ class Subscriber:
             })
         except Exception as e:
             print(e)
+            
+class Contact:
+    @staticmethod
+    def create(first_name, last_name, email, number, message):
+        try:
+            kind = 'contacts'
+            doc = client.collection(kind).document()
+            doc.set({
+                'first_name': first_name,
+                'last_name': last_name,
+                'email': email,
+                'number': number,
+                'message': message
+            })
+        except Exception as e:
+            print(e)
