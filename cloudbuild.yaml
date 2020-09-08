@@ -3,6 +3,6 @@ steps:
   args:
   - functions
   - deploy
-  - blog-backend
+  - ${_FUNCTION}
   - --source=.
   - --trigger-http

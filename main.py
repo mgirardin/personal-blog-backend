@@ -11,7 +11,7 @@ DEFAULT_HEADERS = {
 
 def defined_routers():
     routers = {
-    	"/article" : ArticleController,
+        "/article" : ArticleController,
         "/articles" : ArticlesController,
         "/contact": ContactController,
         "/signin": EmployeeSignin,
